@@ -1,0 +1,240 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to a Nighthawk M6",
+        "description": "Enter the address and admin password of your Netgear Nighthawk M6.",
+        "data": {
+          "host": "Host",
+          "password": "Admin password",
+          "save_offline": "Save anyway (device is offline)"
+        },
+        "data_description": {
+          "host": "Hostname or IP address of the device's web interface.",
+          "password": "The password you use to log in to the device's web interface.",
+          "save_offline": "Create the entry without reaching the device. The password cannot be checked, and the integration connects once the device is online."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate Nighthawk M6",
+        "description": "The Nighthawk M6 at {host} rejected the stored admin password. Enter the current one.",
+        "data": {
+          "password": "Admin password"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Nighthawk M6",
+        "description": "Change the address or admin password of this Nighthawk M6.",
+        "data": {
+          "host": "Host",
+          "password": "Admin password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Login was rejected. Check the admin password.",
+      "cannot_connect": "Could not reach the device at that host."
+    },
+    "abort": {
+      "already_configured": "This device is already configured.",
+      "reauth_successful": "Re-authentication was successful.",
+      "reconfigure_successful": "Reconfiguration was successful.",
+      "wrong_device": "That address belongs to a different device than the one being reconfigured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Nighthawk M6 options",
+        "data": {
+          "scan_interval": "Polling interval (seconds)"
+        },
+        "data_description": {
+          "scan_interval": "The device allows a single admin session. Polling less often reduces how often an open web interface gets logged out."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "connected": {
+        "name": "Mobile data connection"
+      },
+      "roaming": {
+        "name": "Roaming"
+      },
+      "wan_connected": {
+        "name": "Ethernet uplink"
+      },
+      "failover": {
+        "name": "Failover"
+      },
+      "wifi": {
+        "name": "Wi-Fi"
+      }
+    },
+    "button": {
+      "restart": {
+        "name": "Restart"
+      }
+    },
+    "sensor": {
+      "download_today": {
+        "name": "Download today"
+      },
+      "upload_today": {
+        "name": "Upload today"
+      },
+      "traffic_today": {
+        "name": "Traffic today"
+      },
+      "download_month": {
+        "name": "Download this month"
+      },
+      "upload_month": {
+        "name": "Upload this month"
+      },
+      "traffic_month": {
+        "name": "Traffic this month"
+      },
+      "download_total": {
+        "name": "Download total"
+      },
+      "upload_total": {
+        "name": "Upload total"
+      },
+      "signal_bars": {
+        "name": "Signal bars"
+      },
+      "lte_rsrp": {
+        "name": "LTE RSRP"
+      },
+      "lte_sinr": {
+        "name": "LTE SINR"
+      },
+      "lte_rsrq": {
+        "name": "LTE RSRQ"
+      },
+      "lte_rssi": {
+        "name": "LTE RSSI"
+      },
+      "nr_rsrp": {
+        "name": "5G RSRP"
+      },
+      "nr_sinr": {
+        "name": "5G SINR"
+      },
+      "nr_rsrq": {
+        "name": "5G RSRQ"
+      },
+      "network_type": {
+        "name": "Network type"
+      },
+      "operator": {
+        "name": "Operator"
+      },
+      "lte_bands": {
+        "name": "LTE bands"
+      },
+      "nr_bands": {
+        "name": "5G bands"
+      },
+      "connected_clients": {
+        "name": "Connected clients"
+      },
+      "temperature": {
+        "name": "Temperature"
+      },
+      "thermal_state": {
+        "name": "Thermal state"
+      },
+      "uptime": {
+        "name": "Uptime"
+      },
+      "session_duration": {
+        "name": "Data session duration"
+      },
+      "wan_ip": {
+        "name": "WAN IP address"
+      },
+      "battery": {
+        "name": "Battery"
+      },
+      "sim_status": {
+        "name": "SIM status"
+      },
+      "cell_id": {
+        "name": "Cell ID"
+      },
+      "plmn": {
+        "name": "Network code (MCC-MNC)"
+      },
+      "failover_backhaul": {
+        "name": "Active uplink"
+      },
+      "wifi_clients": {
+        "name": "Wi-Fi clients"
+      },
+      "wifi_ssid": {
+        "name": "Wi-Fi network name"
+      },
+      "ethernet_speed": {
+        "name": "Ethernet speed"
+      },
+      "modem_firmware": {
+        "name": "Modem firmware"
+      },
+      "sim_pin_mode": {
+        "name": "SIM PIN"
+      },
+      "imei": {
+        "name": "IMEI"
+      },
+      "iccid": {
+        "name": "SIM serial number (ICCID)"
+      },
+      "imsi": {
+        "name": "IMSI"
+      },
+      "phone_number": {
+        "name": "Phone number"
+      }
+    },
+    "switch": {
+      "airplane_mode": {
+        "name": "Airplane mode"
+      },
+      "mobile_data": {
+        "name": "Mobile data"
+      },
+      "data_roaming": {
+        "name": "Data roaming"
+      },
+      "upnp": {
+        "name": "UPnP"
+      },
+      "vpn_passthrough": {
+        "name": "VPN passthrough"
+      }
+    },
+    "select": {
+      "power_mode": {
+        "name": "Power mode"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "The device rejected the admin password."
+    },
+    "cannot_connect": {
+      "message": "Could not reach the device: {error}"
+    },
+    "restart_failed": {
+      "message": "The device did not accept the restart: {error}"
+    },
+    "set_failed": {
+      "message": "The device did not accept the change: {error}"
+    }
+  }
+}

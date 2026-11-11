@@ -1,0 +1,38 @@
+[project]
+name = "homeassistant-netgear-m6"
+version = "1"
+description = "Home Assistant integration for the Netgear Nighthawk M6 5G/LTE hotspot"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest-homeassistant-custom-component", "ruff", "pyright"]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "ASYNC", "S", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--cov=custom_components.netgear_m6 --cov-report=term-missing"
+
+[tool.pyright]
+include = ["custom_components", "tests"]
+typeCheckingMode = "standard"
+# HA exposes entity props (available, native_value) as cached_property; the
+# documented CoordinatorEntity pattern overrides them as dynamic @property.
+reportIncompatibleVariableOverride = false
+reportPrivateImportUsage = false

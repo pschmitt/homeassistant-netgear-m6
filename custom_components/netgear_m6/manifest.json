@@ -1,0 +1,17 @@
+{
+  "domain": "netgear_m6",
+  "name": "Netgear Nighthawk M6",
+  "codeowners": [
+    "@pschmitt"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/pschmitt/homeassistant-netgear-m6",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/pschmitt/homeassistant-netgear-m6/issues",
+  "loggers": [
+    "custom_components.netgear_m6"
+  ],
+  "requirements": [],
+  "version": "1"
+}

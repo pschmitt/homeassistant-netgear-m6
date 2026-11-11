@@ -1,0 +1,240 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit einem Nighthawk M6 verbinden",
+        "description": "Gib die Adresse und das Admin-Passwort deines Netgear Nighthawk M6 ein.",
+        "data": {
+          "host": "Host",
+          "password": "Admin-Passwort",
+          "save_offline": "Trotzdem speichern (Gerät ist offline)"
+        },
+        "data_description": {
+          "host": "Hostname oder IP-Adresse der Weboberfläche des Geräts.",
+          "password": "Das Passwort, mit dem du dich an der Weboberfläche des Geräts anmeldest.",
+          "save_offline": "Den Eintrag anlegen, ohne das Gerät zu erreichen. Das Passwort kann nicht geprüft werden; die Integration verbindet sich, sobald das Gerät online ist."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Nighthawk M6 neu authentifizieren",
+        "description": "Der Nighthawk M6 unter {host} hat das gespeicherte Admin-Passwort abgelehnt. Gib das aktuelle ein.",
+        "data": {
+          "password": "Admin-Passwort"
+        }
+      },
+      "reconfigure": {
+        "title": "Nighthawk M6 neu konfigurieren",
+        "description": "Ändere die Adresse oder das Admin-Passwort dieses Nighthawk M6.",
+        "data": {
+          "host": "Host",
+          "password": "Admin-Passwort"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Die Anmeldung wurde abgelehnt. Prüfe das Admin-Passwort.",
+      "cannot_connect": "Das Gerät unter diesem Host ist nicht erreichbar."
+    },
+    "abort": {
+      "already_configured": "Dieses Gerät ist bereits eingerichtet.",
+      "reauth_successful": "Die erneute Authentifizierung war erfolgreich.",
+      "reconfigure_successful": "Die Neukonfiguration war erfolgreich.",
+      "wrong_device": "Diese Adresse gehört zu einem anderen Gerät als dem, das neu konfiguriert wird."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Nighthawk-M6-Optionen",
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)"
+        },
+        "data_description": {
+          "scan_interval": "Das Gerät erlaubt nur eine Admin-Sitzung. Seltenere Abfragen verringern, wie oft eine geöffnete Weboberfläche abgemeldet wird."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "connected": {
+        "name": "Mobilfunkverbindung"
+      },
+      "roaming": {
+        "name": "Roaming"
+      },
+      "wan_connected": {
+        "name": "Ethernet-Uplink"
+      },
+      "failover": {
+        "name": "Failover"
+      },
+      "wifi": {
+        "name": "WLAN"
+      }
+    },
+    "button": {
+      "restart": {
+        "name": "Neustart"
+      }
+    },
+    "sensor": {
+      "download_today": {
+        "name": "Download heute"
+      },
+      "upload_today": {
+        "name": "Upload heute"
+      },
+      "traffic_today": {
+        "name": "Datenverkehr heute"
+      },
+      "download_month": {
+        "name": "Download diesen Monat"
+      },
+      "upload_month": {
+        "name": "Upload diesen Monat"
+      },
+      "traffic_month": {
+        "name": "Datenverkehr diesen Monat"
+      },
+      "download_total": {
+        "name": "Download gesamt"
+      },
+      "upload_total": {
+        "name": "Upload gesamt"
+      },
+      "signal_bars": {
+        "name": "Signalbalken"
+      },
+      "lte_rsrp": {
+        "name": "LTE-RSRP"
+      },
+      "lte_sinr": {
+        "name": "LTE-SINR"
+      },
+      "lte_rsrq": {
+        "name": "LTE-RSRQ"
+      },
+      "lte_rssi": {
+        "name": "LTE-RSSI"
+      },
+      "nr_rsrp": {
+        "name": "5G-RSRP"
+      },
+      "nr_sinr": {
+        "name": "5G-SINR"
+      },
+      "nr_rsrq": {
+        "name": "5G-RSRQ"
+      },
+      "network_type": {
+        "name": "Netzwerktyp"
+      },
+      "operator": {
+        "name": "Netzbetreiber"
+      },
+      "lte_bands": {
+        "name": "LTE-Bänder"
+      },
+      "nr_bands": {
+        "name": "5G-Bänder"
+      },
+      "connected_clients": {
+        "name": "Verbundene Geräte"
+      },
+      "temperature": {
+        "name": "Temperatur"
+      },
+      "thermal_state": {
+        "name": "Temperaturstatus"
+      },
+      "uptime": {
+        "name": "Betriebszeit"
+      },
+      "session_duration": {
+        "name": "Dauer der Datensitzung"
+      },
+      "wan_ip": {
+        "name": "WAN-IP-Adresse"
+      },
+      "battery": {
+        "name": "Akku"
+      },
+      "sim_status": {
+        "name": "SIM-Status"
+      },
+      "cell_id": {
+        "name": "Zellen-ID"
+      },
+      "plmn": {
+        "name": "Netzcode (MCC-MNC)"
+      },
+      "failover_backhaul": {
+        "name": "Aktiver Uplink"
+      },
+      "wifi_clients": {
+        "name": "WLAN-Geräte"
+      },
+      "wifi_ssid": {
+        "name": "WLAN-Name"
+      },
+      "ethernet_speed": {
+        "name": "Ethernet-Geschwindigkeit"
+      },
+      "modem_firmware": {
+        "name": "Modem-Firmware"
+      },
+      "sim_pin_mode": {
+        "name": "SIM-PIN"
+      },
+      "imei": {
+        "name": "IMEI"
+      },
+      "iccid": {
+        "name": "SIM-Seriennummer (ICCID)"
+      },
+      "imsi": {
+        "name": "IMSI"
+      },
+      "phone_number": {
+        "name": "Telefonnummer"
+      }
+    },
+    "switch": {
+      "airplane_mode": {
+        "name": "Flugmodus"
+      },
+      "mobile_data": {
+        "name": "Mobile Daten"
+      },
+      "data_roaming": {
+        "name": "Daten-Roaming"
+      },
+      "upnp": {
+        "name": "UPnP"
+      },
+      "vpn_passthrough": {
+        "name": "VPN-Durchleitung"
+      }
+    },
+    "select": {
+      "power_mode": {
+        "name": "Energiemodus"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Das Gerät hat das Admin-Passwort abgelehnt."
+    },
+    "cannot_connect": {
+      "message": "Das Gerät ist nicht erreichbar: {error}"
+    },
+    "restart_failed": {
+      "message": "Das Gerät hat den Neustart nicht angenommen: {error}"
+    },
+    "set_failed": {
+      "message": "Das Gerät hat die Änderung nicht angenommen: {error}"
+    }
+  }
+}
