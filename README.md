@@ -19,7 +19,7 @@ external scripts are needed.
 - **Traffic that survives reconnects:** daily, monthly and lifetime download/upload totals. The device only counts the current data session, so the integration accumulates the deltas itself. See [Traffic counters](docs/setup.md#traffic-counters).
 - **Signal and network:** LTE and 5G signal quality (RSRP, RSRQ, SINR, RSSI), bands, operator, network type, cell ID, roaming, and which uplink is active when the hotspot fails over.
 - **Controls:** airplane mode, mobile data, data roaming, UPnP, VPN passthrough, power mode, and a restart button.
-- **Device metadata:** serial number, firmware, hardware and modem versions, Wi-Fi and Ethernet MAC addresses, plus IMEI, SIM serial number (ICCID), IMSI and phone number as opt-in diagnostic sensors.
+- **Device metadata:** serial number, firmware, hardware and modem versions, Wi-Fi and Ethernet MAC addresses, plus IMEI (and its software version), SIM serial number (ICCID), IMSI and phone number as opt-in diagnostic sensors.
 - **UI configuration:** config flow with reauthentication, reconfiguration and a polling-interval option. Startup never waits for the device. See [Setup](docs/setup.md).
 
 ## Install

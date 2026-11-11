@@ -24,6 +24,7 @@ def test_parses_a_full_document() -> None:
     assert data.plmn == "262-07"
     assert data.cell_id == 1234567
     assert data.iccid == "8949000000000000001"
+    assert data.imei_sv == "19"
     assert data.wifi_mac == "AA:BB:CC:00:00:01"
     assert data.ethernet_mac == "AA:BB:CC:00:00:02"
     assert data.failover_backhaul == "LTE"
@@ -71,3 +72,17 @@ def test_tolerates_a_guest_document() -> None:
     assert data.clients == 0
     assert data.power_profiles == {}
     assert data.plmn is None
+
+
+def test_effective_power_profile_without_battery() -> None:
+    """A device without a battery always runs the plugged-in profile."""
+    data = NetgearM6Data.from_model(base_model())
+    assert data.power_profile == "0"
+    assert data.effective_power_profile == "2"
+
+
+def test_effective_power_profile_with_battery() -> None:
+    """With a battery the stored profile applies."""
+    model = base_model()
+    model["power"]["batteryState"] = "Discharging"
+    assert NetgearM6Data.from_model(model).effective_power_profile == "0"

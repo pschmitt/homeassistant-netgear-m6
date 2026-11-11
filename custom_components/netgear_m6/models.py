@@ -41,6 +41,19 @@ def _bool(value: Any) -> bool | None:
     return value if isinstance(value, bool) else None
 
 
+AC_PROFILE_NAME = "ACPowered"
+
+
+def _ac_profile(entries: Any) -> str | None:
+    """Return the id of the profile the device uses when plugged in."""
+    if not isinstance(entries, list):
+        return None
+    for entry in entries:
+        if isinstance(entry, dict) and entry.get("name") == AC_PROFILE_NAME:
+            return str(entry["id"]) if entry.get("id") is not None else None
+    return None
+
+
 def _profiles(entries: Any) -> dict[str, str]:
     """Return the power profiles as ``{id: label}``."""
     if not isinstance(entries, list):
@@ -109,6 +122,7 @@ class NetgearM6Data:
     battery_temperature: int | None
 
     imei: str | None
+    imei_sv: str | None
     iccid: str | None
     imsi: str | None
     phone_number: str | None
@@ -132,8 +146,21 @@ class NetgearM6Data:
     vpn_passthrough: bool | None
     power_profile: str | None
     power_profiles: dict[str, str]
+    power_profile_ac: str | None
 
     traffic: TrafficSnapshot = field(default_factory=TrafficSnapshot)
+
+    @property
+    def effective_power_profile(self) -> str | None:
+        """Return the active profile id.
+
+        ``power.profileCurrent`` only holds the profile used on battery. A device
+        without a battery always runs the plugged-in profile, which is what the
+        web interface shows too.
+        """
+        if not self.has_battery and self.power_profile_ac is not None:
+            return self.power_profile_ac
+        return self.power_profile
 
     @property
     def connected(self) -> bool:
@@ -194,6 +221,9 @@ class NetgearM6Data:
             ),
             ethernet_speed=_text(ethernet.get("speedMax")),
             imei=_text(general.get("IMEI")),
+            imei_sv=_text(
+                str(general["SVN"]) if general.get("SVN") is not None else None
+            ),
             iccid=_text(sim.get("iccid")),
             imsi=_text(sim.get("imsi")),
             phone_number=_text(sim.get("phoneNumber")),
@@ -219,6 +249,7 @@ class NetgearM6Data:
             vpn_passthrough=_bool(router.get("VPNpassthrough")),
             power_profile=_text(power.get("profileCurrent")),
             power_profiles=_profiles(power.get("profileList")),
+            power_profile_ac=_ac_profile(power.get("profileList")),
             has_battery=has_battery,
             battery_level=_int(power.get("battChargeLevel")) if has_battery else None,
             battery_state=battery_state if has_battery else None,

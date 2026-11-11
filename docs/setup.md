@@ -43,10 +43,10 @@ device; earlier traffic is not known.
 Disabled-by-default entities are hidden until you enable them.
 
 - **Sensors:** signal bars, LTE and 5G signal quality, bands, network type, operator, cell ID, network code, SIM status, active uplink, Wi-Fi clients, connected clients, temperature, battery (only with a battery fitted).
-- **Hidden by default:** RSRQ and RSSI, uptime, session duration, WAN IP, Wi-Fi name, Ethernet speed, modem firmware, SIM PIN state, and the identifiers **IMEI**, **SIM serial number (ICCID)**, **IMSI** and **phone number**.
+- **Hidden by default:** RSRQ and RSSI, uptime, session duration, WAN IP, Wi-Fi name, Ethernet speed, modem firmware, SIM PIN state, and the identifiers **IMEI**, **IMEI software version**, **SIM serial number (ICCID)**, **IMSI** and **phone number**.
 - **Binary sensors:** mobile data connection, Ethernet uplink, failover, Wi-Fi, roaming.
 - **Switches:** airplane mode, mobile data, data roaming, UPnP, VPN passthrough.
-- **Select:** power mode (the profiles the device offers).
+- **Select:** power mode (the profiles the device offers). A device without a battery always runs the **Plugged in** profile, which the select shows; changing it is refused there, because the stored choice only applies on battery.
 - **Button:** restart.
 
 The Wi-Fi and Ethernet MAC addresses and the serial number are part of the

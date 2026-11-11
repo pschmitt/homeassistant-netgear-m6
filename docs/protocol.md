@@ -40,7 +40,11 @@ refuses a field. Values are `"true"`/`"false"` strings. New state shows in
 | Data roaming | `wwan.intlroaming` | `wwan.autoconnect` |
 | UPnP | `router.UPNPenabled` | `router.UPNPenabled` |
 | VPN passthrough | `router.VPNpassthrough` | `router.VPNpassthrough` |
-| Power mode | `powermanager.profile` | `power.profileCurrent` |
+| Power mode | `powermanager.profile` | `power.profileCurrent` (see below) |
+
+`power.profileCurrent` only holds the profile used on battery. With
+`power.batteryState` = `NoBattery` the device always runs the profile named
+`ACPowered`, which is how the web interface shows it.
 
 Mobile data and roaming share one form and are posted together. The state is
 `wwan.autoconnect`: `Never` (neither), `HomeNetwork` (data only), `RoamNetwork`

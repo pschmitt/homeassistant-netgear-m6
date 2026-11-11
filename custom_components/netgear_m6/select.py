@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from homeassistant.components.select import SelectEntity
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
+from .const import DOMAIN
 from .coordinator import NetgearM6ConfigEntry, NetgearM6Coordinator
 from .entity import NetgearM6Entity
 
@@ -37,13 +39,21 @@ class NetgearM6PowerModeSelect(NetgearM6Entity, SelectEntity):
     def current_option(self) -> str | None:
         """Return the active profile label."""
         data = self.coordinator.data
-        if not data or data.power_profile is None:
-            return None
-        return data.power_profiles.get(data.power_profile)
+        profile = data.effective_power_profile if data else None
+        return data.power_profiles.get(profile) if data and profile else None
 
     async def async_select_option(self, option: str) -> None:
         """Activate a profile."""
-        profiles = self.coordinator.data.power_profiles
+        data = self.coordinator.data
+        if option == self.current_option:
+            return
+        if not data.has_battery:
+            # Without a battery the device always runs the plugged-in profile;
+            # the stored choice would only apply once a battery is fitted.
+            raise ServiceValidationError(
+                translation_domain=DOMAIN, translation_key="power_mode_plugged_in"
+            )
+        profiles = data.power_profiles
         profile_id = next((i for i, label in profiles.items() if label == option), None)
         if profile_id is None:
             raise ValueError(option)

@@ -198,6 +198,9 @@
       },
       "phone_number": {
         "name": "Phone number"
+      },
+      "imei_sv": {
+        "name": "IMEI software version"
       }
     },
     "switch": {
@@ -235,6 +238,9 @@
     },
     "set_failed": {
       "message": "The device did not accept the change: {error}"
+    },
+    "power_mode_plugged_in": {
+      "message": "This device has no battery, so it always runs in the plugged-in power mode."
     }
   }
 }

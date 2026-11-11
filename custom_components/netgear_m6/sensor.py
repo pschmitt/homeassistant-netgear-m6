@@ -277,6 +277,12 @@ SENSORS: tuple[NetgearM6SensorDescription, ...] = (
         value_fn=lambda d: d.imei,
     ),
     NetgearM6SensorDescription(
+        key="imei_sv",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        value_fn=lambda d: d.imei_sv,
+    ),
+    NetgearM6SensorDescription(
         key="iccid",
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,

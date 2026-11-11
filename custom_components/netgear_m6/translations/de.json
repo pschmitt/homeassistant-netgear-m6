@@ -198,6 +198,9 @@
       },
       "phone_number": {
         "name": "Telefonnummer"
+      },
+      "imei_sv": {
+        "name": "IMEI-Softwareversion"
       }
     },
     "switch": {
@@ -235,6 +238,9 @@
     },
     "set_failed": {
       "message": "Das Gerät hat die Änderung nicht angenommen: {error}"
+    },
+    "power_mode_plugged_in": {
+      "message": "Dieses Gerät hat keinen Akku und läuft deshalb immer im Netzbetrieb-Energiemodus."
     }
   }
 }

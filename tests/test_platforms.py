@@ -20,7 +20,7 @@ from homeassistant.const import (
     STATE_ON,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import HomeAssistantError
+from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from . import get_state
@@ -75,7 +75,7 @@ async def test_disabled_by_default_diagnostics(
 ) -> None:
     """Identifiers stay hidden until the user enables them."""
     await _setup(hass, mock_entry)
-    for key in ("imei", "iccid", "imsi", "phone_number"):
+    for key in ("imei", "imei_sv", "iccid", "imsi", "phone_number"):
         assert hass.states.get(f"sensor.{P}_{key}") is None
 
 
@@ -151,23 +151,42 @@ async def test_data_switches_keep_each_other(
     assert get_state(hass, f"switch.{P}_data_roaming").state == STATE_ON
 
 
-async def test_power_mode_select(
+async def test_power_mode_without_battery_is_plugged_in(
     hass: HomeAssistant, device: FakeM6, mock_entry: MockConfigEntry
 ) -> None:
+    """No battery means the plugged-in profile, whatever the stored choice is."""
     await _setup(hass, mock_entry)
     entity_id = f"select.{P}_power_mode"
     state = get_state(hass, entity_id)
-    assert state.state == "Balanced"
+    assert state.state == "Plugged in"
     assert state.attributes[ATTR_OPTIONS] == ["Balanced", "Performance", "Plugged in"]
+
+    with pytest.raises(ServiceValidationError):
+        await _call(
+            hass,
+            SELECT_DOMAIN,
+            SERVICE_SELECT_OPTION,
+            **{ATTR_ENTITY_ID: entity_id, ATTR_OPTION: "Performance"},
+        )
+    assert device.model["power"]["profileCurrent"] == "0"
+
+
+async def test_power_mode_select_with_battery(
+    hass: HomeAssistant, device: FakeM6, mock_entry: MockConfigEntry
+) -> None:
+    device.model["power"].update({"batteryState": "Discharging", "battChargeLevel": 80})
+    await _setup(hass, mock_entry)
+    entity_id = f"select.{P}_power_mode"
+    assert get_state(hass, entity_id).state == "Balanced"
 
     await _call(
         hass,
         SELECT_DOMAIN,
         SERVICE_SELECT_OPTION,
-        **{ATTR_ENTITY_ID: entity_id, ATTR_OPTION: "Plugged in"},
+        **{ATTR_ENTITY_ID: entity_id, ATTR_OPTION: "Performance"},
     )
-    assert device.model["power"]["profileCurrent"] == "2"
-    assert get_state(hass, entity_id).state == "Plugged in"
+    assert device.model["power"]["profileCurrent"] == "1"
+    assert get_state(hass, entity_id).state == "Performance"
 
 
 async def test_restart_button(

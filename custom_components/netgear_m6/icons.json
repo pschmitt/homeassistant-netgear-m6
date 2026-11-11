@@ -146,6 +146,9 @@
       },
       "phone_number": {
         "default": "mdi:phone"
+      },
+      "imei_sv": {
+        "default": "mdi:identifier"
       }
     },
     "switch": {

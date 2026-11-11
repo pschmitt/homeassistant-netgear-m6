@@ -24,6 +24,7 @@ def base_model() -> dict[str, Any]:
         "general": {
             "FSN": "FSN0000000001",
             "IMEI": "350000000000001",
+            "SVN": "19",
             "model": "MR6450",
             "FWversion": "NTGX65_12.01.74.00",
             "HWversion": "1.0",
