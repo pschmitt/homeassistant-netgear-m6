@@ -25,7 +25,4 @@ jobs:
       - run: uv sync --locked
       - run: uv run pytest
   hassfest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: home-assistant/actions/hassfest@master
+    uses: pschmitt/ci-workflows/.github/workflows/home-assistant-hassfest.yaml@main
